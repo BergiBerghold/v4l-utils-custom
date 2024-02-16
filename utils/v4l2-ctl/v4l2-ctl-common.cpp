@@ -904,7 +904,13 @@ void common_set(int fd)
 
 				std::cout << "Else. " << ctrl.value << '\n';
 			}
-			class2ctrls[V4L2_CTRL_ID2WHICH(ctrl.id)].push_back(ctrl);
+
+			if (ctrl.id == 10357002) {
+				class2ctrls[V4L2_CTRL_CLASS_USER].push_back(ctrl);
+			} else {
+				class2ctrls[V4L2_CTRL_ID2WHICH(ctrl.id)].push_back(ctrl);
+			}
+
 
 			std::cout << "ctrl.id is " << ctrl.id << '\n';
 			std::cout << "Idx is " << V4L2_CTRL_ID2WHICH(ctrl.id) << '\n';
@@ -918,7 +924,7 @@ void common_set(int fd)
 					struct v4l2_control ctrl;
 
 					std::cout << "Applying ID " << iter->second[i].id << '\n';
-					std::cout << "Applying Value " << iter->second[i].value << '\n';
+					std::cout << "Applying Value " << iter->second[i].value << '\n\n\n';
 
 					ctrl.id = iter->second[i].id;
 					ctrl.value = iter->second[i].value;
