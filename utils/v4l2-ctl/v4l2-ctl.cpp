@@ -28,7 +28,10 @@
 #include <inttypes.h>
 #include <getopt.h>
 #include <sys/types.h>
-#include <sys/sysmacros.h>
+
+#define major(dev) ((int)(((unsigned int) (dev) >> 8) & 0xff))
+#define minor(dev) ((int)((dev) & 0xff))
+
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <ctype.h>
