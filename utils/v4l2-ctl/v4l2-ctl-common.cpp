@@ -736,7 +736,8 @@ void common_cmd(int ch, char *optarg)
 				exit(1);
 			}
 			if (const char *equal = strchr(value, '=')) {
-				std::cout << std::string(value, (equal - value)) << " " << equal + 1;
+				std::cout << std::string(value, (equal - value)) << " " << equal + 1 << '\n';
+
 				set_ctrls[std::string(value, (equal - value))] = equal + 1;
 			}
 			else {
@@ -886,11 +887,12 @@ void common_set(int fd)
 							ctrl.p_u32[i] = v;
 					break;
 				case V4L2_CTRL_TYPE_STRING:
-					std::cout << "STR\n\n\n";
+					std::cout << "STR\n";
 					strncpy(ctrl.string, iter->second.c_str(), qc.maximum);
 					ctrl.string[qc.maximum] = 0;
 					break;
 				default:
+					std::cout << "Unsupported\n";
 					fprintf(stderr, "%s: unsupported payload type\n",
 							qc.name);
 					break;
@@ -899,6 +901,8 @@ void common_set(int fd)
 				if (V4L2_CTRL_DRIVER_PRIV(ctrl.id))
 					use_ext_ctrls = true;
 				ctrl.value = strtol(iter->second.c_str(), NULL, 0);
+
+				std::cout << "Else\n";
 			}
 			class2ctrls[V4L2_CTRL_ID2WHICH(ctrl.id)].push_back(ctrl);
 		}
