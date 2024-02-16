@@ -924,7 +924,7 @@ void common_set(int fd)
 					struct v4l2_control ctrl;
 
 					std::cout << "Applying ID " << iter->second[i].id << '\n';
-					std::cout << "Applying Value " << iter->second[i].value << '\n\n\n';
+					std::cout << "Applying Value " << iter->second[i].value << "\n\n\n";
 
 					ctrl.id = iter->second[i].id;
 					ctrl.value = iter->second[i].value;
