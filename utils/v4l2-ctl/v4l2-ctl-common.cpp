@@ -735,6 +735,7 @@ void common_cmd(int ch, char *optarg)
 				exit(1);
 			}
 			if (const char *equal = strchr(value, '=')) {
+				std::cout << std::string(value, (equal - value)) << " " << equal + 1;
 				set_ctrls[std::string(value, (equal - value))] = equal + 1;
 			}
 			else {
