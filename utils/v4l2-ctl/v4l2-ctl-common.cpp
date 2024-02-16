@@ -905,6 +905,9 @@ void common_set(int fd)
 				std::cout << "Else. " << ctrl.value << '\n';
 			}
 			class2ctrls[V4L2_CTRL_ID2WHICH(ctrl.id)].push_back(ctrl);
+
+			std::cout << "ctrl.id is " << ctrl.id << '\n';
+			std::cout << "Idx is " << V4L2_CTRL_ID2WHICH(ctrl.id) << '\n';
 		}
 		for (class2ctrls_map::iterator iter = class2ctrls.begin();
 				iter != class2ctrls.end(); ++iter) {
@@ -913,6 +916,9 @@ void common_set(int fd)
 			     iter->first == V4L2_CID_PRIVATE_BASE)) {
 				for (unsigned i = 0; i < iter->second.size(); i++) {
 					struct v4l2_control ctrl;
+
+					std::cout << "Applying ID " << iter->second[i].id << '\n';
+					std::cout << "Applying Value " << iter->second[i].value << '\n';
 
 					ctrl.id = iter->second[i].id;
 					ctrl.value = iter->second[i].value;
