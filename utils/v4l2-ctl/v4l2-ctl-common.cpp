@@ -902,7 +902,7 @@ void common_set(int fd)
 					use_ext_ctrls = true;
 				ctrl.value = strtol(iter->second.c_str(), NULL, 0);
 
-				std::cout << "Else\n";
+				std::cout << "Else. " << ctrl.value << '\n';
 			}
 			class2ctrls[V4L2_CTRL_ID2WHICH(ctrl.id)].push_back(ctrl);
 		}
