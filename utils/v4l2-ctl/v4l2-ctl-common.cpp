@@ -824,16 +824,23 @@ void common_set(int fd)
 			struct v4l2_ext_control ctrl;
 			struct v4l2_query_ext_ctrl &qc = ctrl_str2q[iter->first];
 
+			std::cout << "We're processing:" << iter->first << '\n';
+
 			memset(&ctrl, 0, sizeof(ctrl));
 			ctrl.id = qc.id;
-			if (qc.type == V4L2_CTRL_TYPE_INTEGER64)
+			if (qc.type == V4L2_CTRL_TYPE_INTEGER64) {
 				use_ext_ctrls = true;
+				std::cout << "I64\n";
+			}
+
 			if (qc.flags & V4L2_CTRL_FLAG_HAS_PAYLOAD) {
 				struct v4l2_ext_controls ctrls = { 0, 1 };
 				unsigned divide[V4L2_CTRL_MAX_DIMS] = { 0 };
 				ctrl_subset subset;
 				long long v;
 				unsigned d, i;
+
+				std::cout << "Has payload\n";
 
 				use_ext_ctrls = true;
 				ctrl.size = qc.elems * qc.elem_size;
@@ -857,24 +864,28 @@ void common_set(int fd)
 
 				switch (qc.type) {
 				case V4L2_CTRL_TYPE_U8:
+					std::cout << "U8\n";
 					v = strtoul(iter->second.c_str(), NULL, 0);
 					for (i = 0; i < qc.elems; i++)
 						if (idx_in_subset(qc, subset, divide, i))
 							ctrl.p_u8[i] = v;
 					break;
 				case V4L2_CTRL_TYPE_U16:
+					std::cout << "U16\n";
 					v = strtoul(iter->second.c_str(), NULL, 0);
 					for (i = 0; i < qc.elems; i++)
 						if (idx_in_subset(qc, subset, divide, i))
 							ctrl.p_u16[i] = v;
 					break;
 				case V4L2_CTRL_TYPE_U32:
+					std::cout << "U32\n";
 					v = strtoul(iter->second.c_str(), NULL, 0);
 					for (i = 0; i < qc.elems; i++)
 						if (idx_in_subset(qc, subset, divide, i))
 							ctrl.p_u32[i] = v;
 					break;
 				case V4L2_CTRL_TYPE_STRING:
+					std::cout << "STR\n\n\n";
 					strncpy(ctrl.string, iter->second.c_str(), qc.maximum);
 					ctrl.string[qc.maximum] = 0;
 					break;
