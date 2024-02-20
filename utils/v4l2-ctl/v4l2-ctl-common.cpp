@@ -922,7 +922,7 @@ void common_set(int fd)
 			std::cout << "ctrl.id is " << ctrl.id << '\n';
 			std::cout << "Idx is " << V4L2_CTRL_ID2WHICH(ctrl.id) << '\n';
 		}
-		for (class2ctrls_map::iterator iter = class2ctrls.begin();
+		for (class2ctrls_map_star::iterator iter = class2ctrls.begin();
 				iter != class2ctrls.end(); ++iter) {
 			if (!use_ext_ctrls &&
 			    (iter->first == V4L2_CTRL_CLASS_USER ||
