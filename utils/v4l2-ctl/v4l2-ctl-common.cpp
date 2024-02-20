@@ -32,6 +32,7 @@ struct ctrl_subset {
 };
 
 typedef std::map<unsigned, std::vector<struct v4l2_ext_control> > class2ctrls_map;
+typedef std::vector<std::pair <unsigned, std::vector<struct v4l2_ext_control> > > class2ctrls_map_star;
 
 typedef std::map<std::string, struct v4l2_query_ext_ctrl> ctrl_qmap;
 static ctrl_qmap ctrl_str2q;
@@ -819,7 +820,7 @@ void common_set(int fd)
 
 	if (options[OptSetCtrl] && !set_ctrls.empty()) {
 		struct v4l2_ext_controls ctrls;
-		class2ctrls_map class2ctrls;
+		class2ctrls_map_star class2ctrls;
 		bool use_ext_ctrls = false;
 
 		memset(&ctrls, 0, sizeof(ctrls));
@@ -908,9 +909,11 @@ void common_set(int fd)
 			}
 
 			if (ctrl.id == 10357002) {
-				class2ctrls[V4L2_CTRL_CLASS_USER].push_back(ctrl);
+				//class2ctrls[V4L2_CTRL_CLASS_USER].push_back(ctrl);
+                class2ctrls.emplace_back(V4L2_CTRL_CLASS_USER, ctrl)
 			} else {
-				class2ctrls[V4L2_CTRL_ID2WHICH(ctrl.id)].push_back(ctrl);
+				//class2ctrls[V4L2_CTRL_ID2WHICH(ctrl.id)].push_back(ctrl);
+                class2ctrls.emplace_back(V4L2_CTRL_ID2WHICH(ctrl.id), ctrl)
 			}
 
 
