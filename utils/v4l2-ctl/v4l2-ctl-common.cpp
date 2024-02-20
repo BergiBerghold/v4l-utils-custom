@@ -915,7 +915,7 @@ void common_set(int fd)
                 class2ctrls.push_back(pair_star(V4L2_CTRL_CLASS_USER, ctrl));
 			} else {
 				//class2ctrls[V4L2_CTRL_ID2WHICH(ctrl.id)].push_back(ctrl);
-                class2ctrls.emplace_back(pair_star(V4L2_CTRL_CLASS_USER, ctrl));
+                class2ctrls.push_back(pair_star(V4L2_CTRL_CLASS_USER, ctrl));
 			}
 
 
