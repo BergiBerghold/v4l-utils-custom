@@ -44,7 +44,8 @@ static ctrl_subset_map ctrl_subsets;
 typedef std::list<std::string> ctrl_get_list;
 static ctrl_get_list get_ctrls;
 
-typedef std::map<std::string, std::string> ctrl_set_map;
+//typedef std::map<std::string, std::string> ctrl_set_map;
+typedef std::vector<std::pair<std::string, std::string>> ctrl_set_map;
 static ctrl_set_map set_ctrls;
 
 typedef std::vector<std::string> dev_vec;
