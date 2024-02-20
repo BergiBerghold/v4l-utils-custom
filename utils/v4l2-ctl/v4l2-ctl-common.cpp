@@ -941,6 +941,10 @@ void common_set(int fd)
 						fprintf(stderr, "%s: %s\n",
 								ctrl_id2str[ctrl.id].c_str(),
 								strerror(errno));
+
+                        printf(stderr, "%s: %s\n",
+                                ctrl_id2str[ctrl.id].c_str(),
+                                strerror(errno));
 					}
 				}
 				continue;
