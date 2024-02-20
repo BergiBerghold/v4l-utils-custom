@@ -912,10 +912,12 @@ void common_set(int fd)
 
 			if (ctrl.id == 10357002) {
 				//class2ctrls[V4L2_CTRL_CLASS_USER].push_back(ctrl);
-                class2ctrls.push_back(pair_star(V4L2_CTRL_CLASS_USER, ctrl));
+                class2ctrls.push_back(pair_star(V4L2_CTRL_CLASS_USER, {} ));
+                class2ctrls.back().second.push_back(ctrl);
 			} else {
 				//class2ctrls[V4L2_CTRL_ID2WHICH(ctrl.id)].push_back(ctrl);
-                class2ctrls.push_back(pair_star(V4L2_CTRL_CLASS_USER, ctrl));
+                class2ctrls.push_back(pair_star(V4L2_CTRL_CLASS_USER, {} ));
+                class2ctrls.back().second.push_back(ctrl);
 			}
 
 
